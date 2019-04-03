@@ -166,10 +166,15 @@ app.post('/addSubscriber', (req, res) => {
     }
 })
 
+app.get('/singlelibrary',(req,res)=>{
+res.render('SingleLibrary')
+})
+
 app.get('/library', (req, res) => {
     res.render('library');
 })
 
-app.listen(3000, () => {
+const port=process.env||3000
+app.listen(port, () => {
     console.log('Server is up on port 3000.')
 })
