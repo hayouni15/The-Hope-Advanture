@@ -14,13 +14,14 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
+    "env-cmd": "^8.0.2",
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start":"node src/app.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "ex": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "env-cmd ./config/dev.env nodemon src/app.js "
   },
   "author": "",
   "license": "ISC"

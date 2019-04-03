@@ -466,7 +466,7 @@
 		}
 		&.active {
 			.overlay-grad {
-				border: 2px solid $primary-color;
+				border: 2px solid $primary-color2;
 			}
 		}
 		.overlay-grad {
@@ -475,7 +475,7 @@
 			@include transition();
 			cursor: pointer;
 			&:hover {
-				border: 2px solid $primary-color;
+				border: 2px solid $primary-color2;
 			}
 		}
 	}
@@ -569,7 +569,7 @@
 				font-size: 21px;
 				@include transition();
 				&:hover {
-					color: $primary-color;
+					color: $primary-color2;
 				}
 			}
 		}
@@ -643,10 +643,10 @@
 				.option {
 					color: $title-color;
 					&.selected {
-						color: $primary-color;
+						color: $primary-color2;
 					}
 					&:hover {
-						color: $primary-color;
+						color: $primary-color2;
 					}
 				}
 			}
