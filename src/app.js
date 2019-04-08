@@ -3,6 +3,8 @@ const express = require('express')
 const hbs = require('hbs')
 require('./db/mongoose')
 const post = require('./models/posts')
+const gallery = require('./models/gallery')
+const gallerylist = require('./models/gallerylist')
 const subscriber = require('./models/subscribers')
 const multer = require('multer')
 
@@ -29,7 +31,11 @@ app.get('/singleBlog/:id', (req, res) => {
             console.log('no article')
         } else {
             try {
-                post.findOneAndUpdate({ _id }, { Article_views: article.Article_views + 1 }, (res) => {
+                post.findOneAndUpdate({
+                    _id
+                }, {
+                    Article_views: article.Article_views + 1
+                }, (res) => {
                     console.log(res)
                 })
             } catch (e) {
@@ -52,7 +58,9 @@ app.get('/singleBlog/:id', (req, res) => {
 })
 app.get('/topArticles', (req, res) => {
     try {
-        post.find().sort({Article_views :-1}).limit(4).then((data) => {
+        post.find().sort({
+            Article_views: -1
+        }).limit(4).then((data) => {
             if (!data) {
                 return res.status(400).send('No record')
             }
@@ -79,10 +87,11 @@ app.get('/articles/:skip/:limit/:topic', (req, res) => {
         } catch (E) {
             console.log(E)
         }
-    }
-    else {
+    } else {
         try {
-            post.find({ Article_topic: topic }).limit(limit).skip(skip).then((data) => {
+            post.find({
+                Article_topic: topic
+            }).limit(limit).skip(skip).then((data) => {
                 if (!data) {
                     return res.status(400).send('No record')
                 }
@@ -135,6 +144,84 @@ app.post('/uploadPic', upload.single('ArticlePicture'), (req, res) => {
     }
 })
 
+app.post('/uploadGallery', upload.array('GalleryPictures'), (req, res) => {
+    console.log(req.body)
+    console.log(req.files)
+    //res.send(req.files)
+    try {
+        res.send({
+            failure: false,
+            message: ' uploaded',
+            filename: req.files
+        })
+    } catch (E) {
+        console.log(E)
+        res.send({
+            failure: true,
+            message: 'Failed to upload pic'
+        })
+    }
+})
+app.post('/addGallery', (req, res) => {
+    try {
+        const newgallery = new gallery(req.body)
+        console.log(req.body)
+        newgallery.save().then(() => {
+            res.send(newgallery)
+        }).catch((e) => {
+            res.status(400).send(e)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+})
+app.post('/addGalleryList', (req, res) => {
+    try {
+        const newgallerylist = new gallerylist(req.body)
+        console.log(req.body)
+        newgallerylist.save().then(() => {
+            res.send(newgallerylist)
+        }).catch((e) => {
+            res.status(400).send(e)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+})
+app.get('/getGalleryList', (req, res) => {
+    try {
+        gallerylist.find().then((data) => {
+            res.send(data)
+        })
+    } catch (E) {
+        res.send(E)
+    }
+})
+app.post('/getSingleGallery', (req, res) => {
+    
+    try {
+        console.log((req.body.galleryTitle))
+        gallerylist.find({Gallery_Title:req.body.galleryTitle}).then((data) => {
+            res.send(data)
+        })
+    } catch (E) {
+        res.send(E)
+    }
+})
+app.post('/getPictures/:title',(req,res)=>{
+    const title = req.params.title
+    if(title==='first'){
+        gallery.find().limit(9).then((data)=>{
+          res.send(data)
+        })
+    }
+    else{
+        gallery.find({Gallery_Title:title}).then((data)=>{
+            res.send(data)
+        })
+    }
+    console.log(title)
+})
 app.post('/addPost', (req, res) => {
     try {
         const newPost = new post(req.body)
@@ -152,6 +239,9 @@ app.post('/addPost', (req, res) => {
 app.get('/addPost', (req, res) => {
     res.render('CreateNewPost')
 })
+app.get('/addGallery', (req, res) => {
+    res.render('addGallery')
+})
 
 app.post('/addSubscriber', (req, res) => {
     try {
@@ -166,15 +256,15 @@ app.post('/addSubscriber', (req, res) => {
     }
 })
 
-app.get('/singlelibrary',(req,res)=>{
-res.render('SingleLibrary')
+app.get('/singlelibrary', (req, res) => {
+    res.render('SingleLibrary')
 })
 
 app.get('/library', (req, res) => {
     res.render('library');
 })
 
-const port=process.env.PORT||3001
+const port = process.env.PORT || 3000
 app.listen(port, () => {
-    console.log('Server is up on port 3000.')
+    console.log('running on port ', port)
 })

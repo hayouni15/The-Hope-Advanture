@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
     <!-- main css -->
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="/mustache/PopularPosts.js"></script>
+    <script src="/MyJs/singlelibrary.js"></script>
+    <script src="/mustache/picture.js"></script>
 </head>
 
 <body>
@@ -116,26 +121,26 @@
     <!-- Start Align Area -->
     <div class="whole-wrap">
         <div class="container">
+
             <div class="section-top-border">
+                
                 <h3 class="mb-30 title_color">About this Gallery</h3>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-md-3">
+                    <div class="blog_info text-right">
+                        <div class="post_tag">
+                            <a class="active" style="text-transform: uppercase;">{{Article_topic}}</a>
+                        </div>
+                        <ul class="blog_meta list">
+                            <li><a id="date"><i class="lnr lnr-calendar-full"></i></a></li>
+                            <li><a id="views">06 views<i class="lnr lnr-eye"></i></a></li>
+                            <li><a id="comments">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                    <div class="col-lg-8">
                         <blockquote class="generic-blockquote">
-                            “Recently, the US Federal government banned online casinos from operating in America by
-                            making it illegal to
-                            transfer money to them through any US bank or payment system. As a result of this law, most
-                            of the popular
-                            online casino networks such as Party Gaming and PlayTech left the United States. Overnight,
-                            online casino
-                            players found themselves being chased by the Federal government. But, after a fortnight, the
-                            online casino
-                            industry came up with a solution and new online casinos started taking root. These began to
-                            operate under a
-                            different business umbrella, and by doing that, rendered the transfer of money to and from
-                            them legal. A major
-                            part of this was enlisting electronic banking systems that would accept this new
-                            clarification and start doing
-                            business with me. Listed in this article are the electronic banking”
+                            
                         </blockquote>
                     </div>
                 </div>
@@ -144,9 +149,9 @@
             <div class="section-top-border">
                 <h3 class="title_color">Image Gallery</h3>
                 <div class="row gallery-item">
-                    <div class="col-md-4">
-                        <a href="img/elements/g1.jpg" class="img-gal">
-                            <div class="single-gallery-image" style="background: url(img/elements/g1.jpg);"></div>
+                    <!--<div class="col-md-4">
+                        <a href="ArticlesImages/1554754488852p4.jpg" class="img-gal">
+                            <div class="single-gallery-image" style="background: url(ArticlesImages/1554754488852p4.jpg);"></div>
                         </a>
                     </div>
                     <div class="col-md-4">
@@ -184,7 +189,7 @@
                             <div class="single-gallery-image" style="background: url(img/elements/g8.jpg);"></div>
                         </a>
                     </div>
-
+ -->
                 </div>
             </div>
             <div class="comments-area" style="    width: 65%;margin: auto;">
@@ -311,61 +316,62 @@
                 </form>
             </div>
             <!--================ End Testimonials Area =================-->
-			<div class="section-top-border">
-				<h3 class="mb-30 title_color">Galleries</h3>
-				<div class="progress-table-wrap">
-					<div class="progress-table">
-						<div class="table-head">
-							<div class="serial">#</div>
-							<div class="country">Location</div>
-							<div class="percentage">Number of pictures</div>
-							<div class="visit"></div>
-						</div>
-						<div class="table-row">
-							<div class="serial">01</div>
-							<div class="country">Canada</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-1" role="progressbar" style="width: 10%;height: 15px"
-										aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">10</div>
-								</div>
-							</div>
-							<div class="visit">
-								<div style="border: 1px solid #0000ff61;padding: 5px;cursor: pointer;"><i
-										class="fa fa-camera-retro" style="margin-right: 5px;"></i>Open Gallery</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">02</div>
-							<div class="country">Canada</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-2" role="progressbar" style="width: 30%;height: 15px"
-										aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30</div>
-								</div>
-							</div>
-							<div class="visit">
-								<div style="border: 1px solid #0000ff61;padding: 5px;cursor: pointer;"><i
-										class="fa fa-camera-retro" style="margin-right: 5px;"></i>Open Gallery</div>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="serial">03</div>
-							<div class="country">Canada</div>
-							<div class="percentage">
-								<div class="progress">
-									<div class="progress-bar color-3" role="progressbar" style="width: 55%;height: 15px;"
-										aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55</div>
-								</div>
-							</div>
-							<div class="visit">
-								<div style="border: 1px solid #0000ff61;padding: 5px;cursor: pointer;"><i
-										class="fa fa-camera-retro" style="margin-right: 5px;"></i>Open Gallery</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="section-top-border">
+                <h3 class="mb-30 title_color">Galleries</h3>
+                <div class="progress-table-wrap">
+                    <div class="progress-table">
+                        <div class="table-head">
+                            <div class="serial">#</div>
+                            <div class="country">Location</div>
+                            <div class="percentage">Number of pictures</div>
+                            <div class="visit"></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="serial">01</div>
+                            <div class="country">Canada</div>
+                            <div class="percentage">
+                                <div class="progress">
+                                    <div class="progress-bar color-1" role="progressbar" style="width: 10%;height: 15px"
+                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">10</div>
+                                </div>
+                            </div>
+                            <div class="visit">
+                                <div style="border: 1px solid #0000ff61;padding: 5px;cursor: pointer;"><i
+                                        class="fa fa-camera-retro" style="margin-right: 5px;"></i>Open Gallery</div>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="serial">02</div>
+                            <div class="country">Canada</div>
+                            <div class="percentage">
+                                <div class="progress">
+                                    <div class="progress-bar color-2" role="progressbar" style="width: 30%;height: 15px"
+                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30</div>
+                                </div>
+                            </div>
+                            <div class="visit">
+                                <div style="border: 1px solid #0000ff61;padding: 5px;cursor: pointer;"><i
+                                        class="fa fa-camera-retro" style="margin-right: 5px;"></i>Open Gallery</div>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="serial">03</div>
+                            <div class="country">Canada</div>
+                            <div class="percentage">
+                                <div class="progress">
+                                    <div class="progress-bar color-3" role="progressbar"
+                                        style="width: 55%;height: 15px;" aria-valuenow="55" aria-valuemin="0"
+                                        aria-valuemax="100">55</div>
+                                </div>
+                            </div>
+                            <div class="visit">
+                                <div style="border: 1px solid #0000ff61;padding: 5px;cursor: pointer;"><i
+                                        class="fa fa-camera-retro" style="margin-right: 5px;"></i>Open Gallery</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- End Align Area -->
