@@ -61,7 +61,7 @@ $(document).ready(() => {
                     setTimeout(()=>{
                         modal.style.display = "none";
                         confirm.innerHTML=''
-                    },1000)
+                    },2000)
                     console.log(data)
                 }
             })

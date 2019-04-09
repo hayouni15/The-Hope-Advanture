@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 	'use strict';
 
 	var window_width = $(window).width(),
@@ -17,10 +17,11 @@
 	//* Navbar Fixed
 	function navbarFixed() {
 		if ($('.header_area').length) {
-			$(window).scroll(function() {
+			$(window).scroll(function () {
 				var scroll = $(window).scrollTop();
 				if (scroll >= nav_offset_top) {
-					$('.header_area').addClass('navbar_fixed');
+					//$('.header_area').addClass('navbar_fixed');
+					$('.header_area').removeClass('navbar_fixed');
 				} else {
 					$('.header_area').removeClass('navbar_fixed');
 				}
@@ -31,24 +32,24 @@
 
 	// Search Toggle
 	$('#search_input_box').hide();
-	$('#search').on('click', function() {
+	$('#search').on('click', function () {
 		$('#search_input_box').slideToggle('slow');
 		$('#search_input').focus();
 	});
-	$('#close_search').on('click', function() {
+	$('#close_search').on('click', function () {
 		$('#search_input_box').slideUp('slow');
 	});
 
 	/*----------------------------------------------------*/
 	/*  Magnific Pop Up
-    /*----------------------------------------------------*/
+    /*----------------------------------------------------
 	$('.img-gal').magnificPopup({
 		type: 'image',
 		gallery: {
 			enabled: true
 		}
 	});
-
+*/
 	/*----------------------------------------------------*/
 	/*  Testimonials Slider
     /*----------------------------------------------------*/
@@ -76,21 +77,6 @@
 		});
 	}
 
-	if ($('.testi-slider').length) {
-		$('.testi-slider').owlCarousel({
-			loop: true,
-			margin: 30,
-			items: 1,
-			nav: false,
-			autoplay: 2500,
-			smartSpeed: 1500,
-			dots: true,
-			responsiveClass: true,
-			thumbs: true,
-			thumbsPrerendered: true,
-			navText: [ "<i class='lnr lnr-arrow-left'></i>", "<i class='lnr lnr-arrow-right'></i>" ]
-		});
-	}
 
 	/*----------------------------------------------------*/
 	/*  MailChimp Slider

@@ -1,8 +1,8 @@
-$(document).ready(()=>{
-const params=new URL(document.location)
-const title=params.searchParams.get('gallery')
-
-     fetch(`/getPictures/${title}`, {
+$(document).ready(() => {
+    const params = new URL(document.location)
+    const title = params.searchParams.get('gallery')
+var pics=[]
+    fetch(`/getPictures/${title}`, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
             'Accept': 'application/json'
@@ -13,27 +13,27 @@ const title=params.searchParams.get('gallery')
     }).then((res) => {
         console.log(res)
         return res.json()
-    }).then((data)=>{
-        data.forEach((element)=>{
+    }).then((data) => {
+        data.forEach((element) => {
             console.log(element)
 
-                var OnePicture = picture
-                const html = Mustache.render(OnePicture, {
-                    Picture_name:element.Picture_name
-                })
-                document.querySelector('.gallery-item').insertAdjacentHTML('afterbegin',html)
+            var OnePicture = picture
+            const html = Mustache.render(OnePicture, {
+                Picture_name: element.Picture_name
+            })
+            pics.push(element.Picture_name)
+            document.querySelector('.gallery-item').insertAdjacentHTML('afterbegin', html)
         })
 
     })
-   // alert('sd')
     const urlParams = new URLSearchParams(window.location.search);
     const galleryTitle = urlParams.get('gallery')
- //   alert(galleryTitle)
-    const gallery={
-        galleryTitle:galleryTitle
+    //   alert(galleryTitle)
+    const gallery = {
+        galleryTitle: galleryTitle
     }
     console.log(gallery)
-     fetch('/getSingleGallery', {
+    fetch('/getSingleGallery', {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
             'Accept': 'application/json',
@@ -45,17 +45,31 @@ const title=params.searchParams.get('gallery')
         console.log(res)
         return res.json()
     })
-    .then((data) => {
-        console.log(data)
-        document.querySelector('.generic-blockquote').innerHTML=data[0].About_Gallery
-        document.querySelector('#date').insertAdjacentHTML("afterbegin",data[0].createdAt.split('T')[0])
-     
-    })
+        .then((data) => {
+            console.log(data)
+            document.querySelector('.generic-blockquote').innerHTML = data[0].About_Gallery
+            document.querySelector('#date').insertAdjacentHTML("afterbegin", data[0].createdAt.split('T')[0])
 
-    $('.img-gal').magnificPopup({
-		type: 'image',
-		gallery: {
-			enabled: true
-		}
-	});
+        })
+
+
+    setTimeout(() => {
+        console.log(pics[0])
+        var matches = [];
+
+
+        for (var i = 0; i < pics.length; i++) {
+            matches.push({ src: '/ArticlesImages/'+ pics[i] });
+        }
+        $('.img-gal').magnificPopup({
+
+            items:
+                matches
+            , gallery: {
+                enabled: true
+            },
+            type: 'image' // this is default type
+        });
+    }, 500)
+
 })
