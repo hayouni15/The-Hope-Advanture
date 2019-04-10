@@ -110,7 +110,7 @@ const storage = multer.diskStorage({
         cb(null, './public/ArticlesImages/')
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + file.originalname)
+        cb(null, Date.now() + file.originalname[0]+'.'+file.originalname.split('.')[file.originalname.split('.').length-1])
     },
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {

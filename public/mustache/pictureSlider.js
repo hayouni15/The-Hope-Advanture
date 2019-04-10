@@ -1,7 +1,6 @@
 const picslide='<div class="item">\
 <div class="testi-item">\
-    <img src="img/quote.png" alt="">\
-    <h4>{{Gallery_Title}}</h4>\
+    <p>{{Gallery_Title}}</p>\
     <div class="col-md-6" style="margin:auto">\
     <a href="img/elements/g1.jpg" class="img-gal">\
         <div class="single-gallery-image" style="background: url(ArticlesImages/{{Picture_name}});height:290px"></div>\
