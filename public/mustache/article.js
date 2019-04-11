@@ -14,7 +14,7 @@ const article = '<article class="row blog_item">\
 </div>\
 <div class="col-md-9">\
     <div class="blog_post">\
-       <a  href="singleBlog/{{id}}" id={{id}} class="ArticleReadCounter"> <img src="ArticlesImages/{{Article_picture}}" alt=""></a>\
+       <a  href="singleBlog/{{id}}" id={{id}} class="ArticleReadCounter"> <img src="{{Article_picture}}" alt=""></a>\
         <div class="blog_details">\
             <a href="single-blog.html">\
                 <h2>{{Article_title}}</h2>\

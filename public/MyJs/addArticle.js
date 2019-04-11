@@ -10,22 +10,22 @@ $(document).ready(() => {
         const file = new FormData()
         const filedata = document.querySelector('#Article-Picture').files[0]
         file.append('ArticlePicture', filedata)
-        console.log(file)
+        console.log(document.querySelector('#Article-Picture').files)
 
         fetch('/uploadPic', {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
 
-                headers: {
-                    'Accept': 'application/json'
-                    // "Content-Type": "application/x-www-form-urlencoded",
-                },
-                referrer: "no-referrer", // no-referrer, *client
-                body: file // body data type must match "Content-Type" header
-            }).then((res) => {
-                console.log(res)
-                return res.json()
-            })
-            .then((data) => {
+            headers: {
+                'Accept': 'application/json'
+                // "Content-Type": "application/x-www-form-urlencoded",
+            },
+            referrer: "no-referrer", // no-referrer, *client
+            body: file // body data type must match "Content-Type" header
+        }).then((res) => {
+            console.log(res)
+            return res.json()
+        })
+            .then(async(data) => {
                 console.log(data)
                 if (data.failure) {
                     console.log('failure')
@@ -46,19 +46,42 @@ $(document).ready(() => {
                         Article_date: now.toDateString(),
                         Article_views: 0
                     }
+                    const flickerdata = {
+                        filepath: data.filepath,
+                        title: $articlePicture,
+                        tags: $articleTitle
+                    }
+                    /// upload to flicker
+                   await fetch('/FlickrUpload', {
+                        method: "POST", // *GET, POST, PUT, DELETE, etc.
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            // "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        referrer: "no-referrer", // no-referrer, *client
+                        body: JSON.stringify(flickerdata), // body data type must match "Content-Type" header
+                    }).then((res) => {
+                        console.log(res)
+                        return res.json()
+                    })
+                        .then((data) => {
+                            console.log(data)
+                        })
+                    ///add to database
                     console.log(articleBody)
                     fetch('/addPost', {
-                            method: "POST", // *GET, POST, PUT, DELETE, etc.
+                        method: "POST", // *GET, POST, PUT, DELETE, etc.
 
-                            headers: {
-                                "Content-Type": "application/json",
-                                // "Content-Type": "application/x-www-form-urlencoded",
-                            },
-                            referrer: "no-referrer", // no-referrer, *client
-                            body: JSON.stringify(articleBody), // body data type must match "Content-Type" header
-                        }).then((res) => {
-                            return res.json()
-                        })
+                        headers: {
+                            "Content-Type": "application/json",
+                            // "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        referrer: "no-referrer", // no-referrer, *client
+                        body: JSON.stringify(articleBody), // body data type must match "Content-Type" header
+                    }).then((res) => {
+                        return res.json()
+                    })
                         .then((data) => {
                             if (data.errors) {
                                 console.log(data.message)

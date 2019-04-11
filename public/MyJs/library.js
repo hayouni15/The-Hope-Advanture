@@ -102,6 +102,6 @@ $(document).ready(async () => {
             },
             type: 'image' // this is default type
         });
-    }, 500)
+    }, 1000)
 
 })

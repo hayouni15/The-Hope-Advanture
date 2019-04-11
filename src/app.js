@@ -7,12 +7,23 @@ const gallery = require('./models/gallery')
 const gallerylist = require('./models/gallerylist')
 const subscriber = require('./models/subscribers')
 const multer = require('multer')
-
+var Flickr = require("flickrapi"),
+flickrOptions = {
+  api_key: process.env.APIKEY,
+  secret: process.env.SECRET,
+  user_id:process.env.USERID,
+  permissions: process.env.PERMISSIONS,
+  access_token:process.env.ACCESSTOKEN,
+  access_token_secret:process.env.ACCESSTOKENSECRET
+  
+};
 const app = express()
 const publicDirectoryPath = path.join(__dirname, '../public')
 app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath))
 app.use(express.json())
+const partialsPath = path.join(__dirname, '../views/partials')
+hbs.registerPartials(partialsPath)
 
 app.get('', (req, res) => {
     res.render('index', {
@@ -139,9 +150,53 @@ app.post('/uploadPic', upload.single('ArticlePicture'), (req, res) => {
         console.log(E)
         res.send({
             failure: true,
-            message: 'Failed to upload pic'
+            message: 'Failed to upload pic',
+            reqbody:req.body
         })
     }
+})
+
+app.post('/FlickrUpload',(req,res)=>{
+console.log('ggg'+req.body)
+    try{
+        Flickr.authenticate(flickrOptions, function(error, flickr) {
+            var uploadOptions = {
+              photos: [{
+                title: req.body.title,
+                tags: [
+                 req.body.tags
+                ],
+                photo: path.join(__dirname, `../public/ArticlesImages/${req.body.title}`) 
+              }]
+            };
+            Flickr.upload(uploadOptions, flickrOptions, function(err, result) {
+              if(err) {
+                return console.error(error);
+              }
+              console.log("photos uploaded", result);
+              res.send({body:req.body})
+            });
+          });
+    }catch(E){
+res.send({error:E})
+    }
+})
+app.post('/getFlickerimages',(req,res)=>{
+    Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+        // we can now use "flickr" as our API object,
+        console.log(';llllll',req.body.picture)
+        flickr.photos.search({
+            user_id: flickr.options.user_id,
+            page: 1,
+            per_page: 500,
+            text:req.body.picture
+          }, function(err, result) {
+            // result is Flickr's response
+            console.log('rsult' ,result.photos)
+            res.send(result.photos)
+          });
+        // but we can only call public methods and access public data
+      });
 })
 
 app.post('/uploadGallery', upload.array('GalleryPictures'), (req, res) => {

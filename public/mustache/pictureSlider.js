@@ -20,3 +20,4 @@ const pagination='<div class="owl-thumb-item" style="width:22px">\
 </div>\
 <div class="overlay overlay-grad "></div>\
 </div>'
+

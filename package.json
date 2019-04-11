@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.16.4",
+    "flickrapi": "^0.6.0",
     "hbs": "^4.0.3",
     "mongodb": "^3.2.2",
     "mongoose": "^5.4.19",
@@ -22,7 +23,8 @@
     "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "ex": "node src/app.js",
-    "dev": "env-cmd ./config/dev.env nodemon src/app.js "
+    "dev": "env-cmd ./config/dev.env nodemon src/app.js ",
+    "testground": "env-cmd ./config/dev.env nodemon src/testground.js "
   },
   "author": "",
   "license": "ISC"
