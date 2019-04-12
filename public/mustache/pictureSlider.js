@@ -3,7 +3,7 @@ const picslide='<div class="item">\
     <p>{{Gallery_Title}}</p>\
     <div class="col-md-6" style="margin:auto">\
     <a href="img/elements/g1.jpg" class="img-gal">\
-        <div class="single-gallery-image" style="background: url(ArticlesImages/{{Picture_name}});height:290px"></div>\
+        <div class="single-gallery-image" style="background: url({{Picture_name}});height:290px"></div>\
     </a>\
 </div>\
     <div class="wow fadeIn" data-wow-duration="1s">\
@@ -20,4 +20,5 @@ const pagination='<div class="owl-thumb-item" style="width:22px">\
 </div>\
 <div class="overlay overlay-grad "></div>\
 </div>'
+
 

@@ -14,41 +14,64 @@ $(document).ready(() => {
             file.append('GalleryPictures', filedata[i])
         }
         await fetch('/uploadGallery', {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                headers: {
-                    'Accept': 'application/json'
-                    // "Content-Type": "application/x-www-form-urlencoded",
-                },
-                referrer: "no-referrer", // no-referrer, *client
-                body: file // body data type must match "Content-Type" header
-            }).then((res) => {
-                //  console.log(res)
-                return res.json()
-            })
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Accept': 'application/json'
+                // "Content-Type": "application/x-www-form-urlencoded",
+            },
+            referrer: "no-referrer", // no-referrer, *client
+            body: file // body data type must match "Content-Type" header
+        }).then((res) => {
+            //  console.log(res)
+            return res.json()
+        })
             .then((data) => {
                 console.log(data)
                 if (data.failure) {
                     return console.log(data.message)
                 }
-                data.filename.forEach(image => {
+                data.filename.forEach(async (image) => {
                     console.log(image)
                     const Gallery = {
                         Gallery_Title: $GalleryTitle.value.trim(),
                         Gallery_place: $GalleryPlace.value.trim(),
                         Picture_name: image.filename
                     }
-                    fetch('/addGallery', {
-                            method: "POST", // *GET, POST, PUT, DELETE, etc.
-                            headers: {
-                                "Content-Type": "application/json",
-                                // "Content-Type": "application/x-www-form-urlencoded",
-                            },
-                            referrer: "no-referrer", // no-referrer, *client
-                            body: JSON.stringify(Gallery), // body data type must match "Content-Type" header
-                        }).then((res) => {
-                            //  console.log(res)
-                            return res.json()
+                    const flickerdata = {
+                        filepath: data.destination,
+                        title: image.filename,
+                        tags: $GalleryPlace.value.trim()
+                    }
+                    console.log('flickerdata', flickerdata)
+                    /// upload to flicker
+                    await fetch('/FlickrUpload', {
+                        method: "POST", // *GET, POST, PUT, DELETE, etc.
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            // "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        referrer: "no-referrer", // no-referrer, *client
+                        body: JSON.stringify(flickerdata), // body data type must match "Content-Type" header
+                    }).then((res) => {
+                        console.log(res)
+                        return res.json()
+                    })
+                        .then((data) => {
+                            console.log(data)
                         })
+                    fetch('/addGallery', {
+                        method: "POST", // *GET, POST, PUT, DELETE, etc.
+                        headers: {
+                            "Content-Type": "application/json",
+                            // "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        referrer: "no-referrer", // no-referrer, *client
+                        body: JSON.stringify(Gallery), // body data type must match "Content-Type" header
+                    }).then((res) => {
+                        //  console.log(res)
+                        return res.json()
+                    })
                         .then((data) => {
                             // console.log(data)
                             if (data.errors) {
@@ -82,28 +105,28 @@ $(document).ready(() => {
             Gallery_Title: $GalleryTitle.value.trim(),
             Gallery_place: $GalleryPlace.value.trim(),
             Pictures_number: filedata.length,
-            About_Gallery:$aboutGallery.value
+            About_Gallery: $aboutGallery.value
         }
         console.log(GalleryList)
         await fetch('/addGalleryList', {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                headers: {
-                    "Content-Type": "application/json",
-                    // "Content-Type": "application/x-www-form-urlencoded",
-                },
-                referrer: "no-referrer", // no-referrer, *client
-                body: JSON.stringify(GalleryList), // body data type must match "Content-Type" header
-            }).then((res) => {
-                //  console.log(res)
-                return res.json()
-            })
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                // "Content-Type": "application/x-www-form-urlencoded",
+            },
+            referrer: "no-referrer", // no-referrer, *client
+            body: JSON.stringify(GalleryList), // body data type must match "Content-Type" header
+        }).then((res) => {
+            //  console.log(res)
+            return res.json()
+        })
             .then((data) => {
                 // console.log(data)
                 if (data.errors) {
                     console.log(data.message)
-                   
+
                 } else {
-                   console.log('gallery list updated')
+                    console.log('gallery list updated')
                 }
             })
 
