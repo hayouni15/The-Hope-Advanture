@@ -6,6 +6,8 @@ const post = require('./models/posts')
 const gallery = require('./models/gallery')
 const gallerylist = require('./models/gallerylist')
 const subscriber = require('./models/subscribers')
+const PrimComment = require('./models/Primcomment')
+const SecComment = require('./models/SecondaryComments')
 const multer = require('multer')
 var Flickr = require("flickrapi"),
 flickrOptions = {
@@ -310,6 +312,36 @@ app.post('/addSubscriber', (req, res) => {
         res.status(400).send(e)
     }
 })
+
+//add primary comment 
+app.post('/addPcomment',(req,res)=>{
+    const pcomment=new PrimComment(req.body)
+    pcomment.save().then(()=>{
+        console.log('comment saved')
+        res.send({
+            fail:false,message:'comment was added successfully'
+        })
+    }).catch((e)=>{
+        console.log('error',e)
+        res.send({
+            fail:true,message:e
+        })
+    })
+})
+//get primary comments
+app.post('/getPcomment',(req,res)=>{
+    PrimComment.find({Comment_of:req.body.id}).then((data)=>{
+        res.send(data)
+
+    }).catch((e)=>{
+        console.log('error',e)
+        res.send({
+            fail:true,message:e
+        })
+    })
+})
+
+//add secondary comments
 
 app.get('/singlelibrary', (req, res) => {
     res.render('SingleLibrary')

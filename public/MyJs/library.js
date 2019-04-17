@@ -134,8 +134,9 @@ const RenderImage = async function (pics, callback) {
     console.log('2')
 
     setTimeout(() => {
+        document.querySelector('#loader').setAttribute('style','display:none')
         callback()
-    }, 1000)
+    }, 2000)
 
 
 }

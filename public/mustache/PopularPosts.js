@@ -1,5 +1,5 @@
 const popularPosts = '<div class="media post_item">\
-    <img style="    width: 101px" src="/ArticlesImages/{{Article_picture }}" alt="post">\
+    <img style="    width: 101px" src="{{Article_picture }}" alt="post">\
         <div class="media-body">\
             <a href="/{{id}}" id={{id}} >\
                 <h3>{{Article_title }}</h3>\

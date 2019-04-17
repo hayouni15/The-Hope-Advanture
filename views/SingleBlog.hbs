@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/img/favicon.png" type="image/png">
     <title>Blog Details</title>
-     <!-- Optional JavaScript -->
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.js"></script>
@@ -19,7 +19,7 @@
     <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
     <script src="/js/jquery.ajaxchimp.min.js"></script>
     <script src="/js/mail-script.js"></script>
-  
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/vendors/linericon/style.css">
@@ -31,31 +31,32 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
     <script src="/mustache/PopularPosts.js"></script>
-     <script src="/MyJs/RenderSingleBlog.js"></script>
+    <script src="/mustache/PrimComment.js"></script>
+    <script src="/MyJs/RenderSingleBlog.js"></script>
 </head>
 
 <body>
 
     <!--================ Start Header Menu Area =================-->
-	{{>header}}
-	<!--================ End Header Menu Area =================-->
+    {{>header}}
+    <!--================ End Header Menu Area =================-->
 
-	<!--================Home Banner Area =================-->
-	<section class="banner_area ">
-		<div class="banner_inner overlay d-flex align-items-center">
-			<div class="container">
-				<div class="banner_content">
-					<div class="page_link">
-						<a href="index.html">Home</a>
-						<a href="blog.html">Blog</a>
-						<a href="single-blog.html">Blog Details</a>
-					</div>
-					<h2>Blog Details</h2>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================End Home Banner Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="banner_area ">
+        <div class="banner_inner overlay d-flex align-items-center">
+            <div class="container">
+                <div class="banner_content">
+                    <div class="page_link">
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="single-blog.html">Blog Details</a>
+                    </div>
+                    <h2>Blog Details</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
 
     <!--================Blog Area =================-->
     <section class="blog_area single-post-area section_gap">
@@ -65,7 +66,8 @@
                     <div class="single-post row">
                         <div class="col-lg-12">
                             <div class="feature-img" style="float: right;">
-                                <img style="max-height: 400px;" class="img-fluid" src="/ArticlesImages/{{Article_picture}}" alt="">
+                                <img style="max-height: 400px;" class="img-fluid"
+                                    src="/ArticlesImages/{{Article_picture}}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-3  col-md-3">
@@ -90,20 +92,21 @@
                         <div class="col-lg-9 col-md-9 blog_details">
                             <h2>{{Article_title}}</h2>
                             <p class="excert">
-                               {{Article_content}}
+                                {{Article_content}}
                             </p>
-                           
+
                         </div>
-                        
+
                     </div>
-                   
+
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
+                        <h4>Comments</h4>
+                        {{!-- <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="/img/blog/c1.jpg" alt="">
+                                        <div style="width: 38px;height: 38px;background: aqua;border-radius: 100px;padding: 9px; font-weight: bold;">AH</div>
+
                                     </div>
                                     <div class="desc">
                                         <h5><a href="#">Emilly Blunt</a></h5>
@@ -174,7 +177,7 @@
                                     <a href="" class="btn-reply text-uppercase">reply</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
@@ -193,30 +196,23 @@
                                     <a href="" class="btn-reply text-uppercase">reply</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="comment-form">
                         <h4>Leave a Reply</h4>
                         <form>
                             <div class="form-group form-inline">
                                 <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter Name'">
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                    <input type="text" class="form-control" id="name" placeholder="Enter Name"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Subject'">
+                                <textarea class="form-control mb-10" rows="5" name="message" id="message"
+                                    placeholder="Messege" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Messege'" required=""></textarea>
                             </div>
-                            <div class="form-group">
-                                <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                            </div>
-                            <a href="#" class="primary-btn">Post Comment</a>
+                            <a id="postComment" style="color: white;" class="primary-btn">Post Comment</a>
                         </form>
                     </div>
                 </div>
@@ -226,7 +222,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search Posts">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                                    <button class="btn btn-default" type="button"><i
+                                            class="lnr lnr-magnifier"></i></button>
                                 </span>
                             </div><!-- /input-group -->
                             <div class="br"></div>
@@ -311,10 +308,12 @@
                             <div class="form-group d-flex flex-row">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                        <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'">
+                                    <input type="text" class="form-control" id="inlineFormInputGroup"
+                                        placeholder="Enter email" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter email'">
                                 </div>
                                 <a href="#" class="bbtns">Subcribe</a>
                             </div>
@@ -388,11 +387,13 @@
                             <p>For business professionals caught between high OEM price and mediocre print and graphic
                                 output, </p>
                             <div class="footer-newsletter" id="mc_embed_signup">
-                                <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                <form target="_blank" novalidate="true"
+                                    action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                     method="get" class="form-inline">
                                     <div class="d-flex flex-row">
-                                        <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Enter Email '" required="" type="email">
+                                        <input class="form-control" name="EMAIL" placeholder="Enter Email"
+                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+                                            required="" type="email">
                                         <button class="click-btn btn btn-default"><span class="lnr lnr-location"
                                                 aria-hidden="true"></span></button>
                                         <div style="position: absolute; left: -5000px;">
@@ -427,10 +428,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                     <div class="col-lg-6 col-md-12 text-right">
                         <div class="social-icons">
@@ -446,10 +451,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!--================ End footer Area =================-->
 
-   <!--gmaps Js-->
+    <!--gmaps Js-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
     <script src="/js/gmaps.min.js"></script>
-    <script src="/js/theme.js"></script>  
+    <script src="/js/theme.js"></script>
 </body>
 
 </html>
