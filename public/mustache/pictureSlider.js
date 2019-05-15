@@ -2,7 +2,7 @@ const picslide='<div class="item">\
 <div class="testi-item">\
     <p>{{Gallery_Title}}</p>\
     <div class="col-md-6" style="margin:auto">\
-    <a href="img/elements/g1.jpg" class="img-gal">\
+    <a href="{{Picture_name}}" class="img-gal">\
         <div class="single-gallery-image" style="background: url({{Picture_name}});height:290px"></div>\
     </a>\
 </div>\

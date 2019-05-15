@@ -37,6 +37,11 @@ app.get('/blog', (req, res) => {
         title: 'The hope advanture'
     });
 })
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'The hope advanture'
+    });
+})
 app.get('/singleBlog/:id', (req, res) => {
     const _id = req.params.id // Access the id provided
     post.findById(_id).then((article) => {
@@ -90,7 +95,7 @@ app.get('/articles/:skip/:limit/:topic', (req, res) => {
     const topic = req.params.topic
     if (topic === 'all') {
         try {
-            post.find().limit(limit).skip(skip).then((data) => {
+            post.find().sort({ Article_date : -1 }).limit(limit).skip(skip).then((data) => {
                 if (!data) {
                     return res.status(400).send('No record')
                 }
@@ -265,6 +270,7 @@ app.post('/getSingleGallery', (req, res) => {
         res.send(E)
     }
 })
+
 app.post('/getPictures/:title',(req,res)=>{
     const title = req.params.title
     if(title==='first'){

@@ -12,9 +12,6 @@ const PrimComment='<div class="comment-list" style="padding-bottom: 16px;">\
             </p>\
         </div>\
     </div>\
-    <div class="reply-btn">\
-        <a name="{{_id}}" href="" class="btn-reply text-uppercase">reply</a>\
-    </div>\
 </div>\
 </div>\
 '

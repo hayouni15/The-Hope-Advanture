@@ -43,11 +43,13 @@
 	<!--================Home Banner Area =================-->
 	<section class="banner_area ">
 		<div class="banner_inner overlay d-flex align-items-center">
-			<div class="container">
+			<div class="container" style="    margin-top: 30px;">
 				<div class="banner_content">
 					<div class="page_link">
-						<a href="index.html">Home</a>
-						<a href="blog.html">Blog</a>
+						<a href="/">Home</a>
+						<a href="/library">Library</a>
+						<a  href="/blog?page=0&&topic=all#">Blog</a>
+						<a href="/About">About</a>
 					</div>
 					<h2>Blog Home</h2>
 				</div>
@@ -58,7 +60,7 @@
 
     <!--================Blog Categorie Area =================-->
     <section class="blog_categorie_area" id="articleContainer">
-        <div class="container">
+        <div style="display:none" class="container">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="categories_post">
@@ -140,7 +142,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                        <aside class="single_sidebar_widget search_widget">
+                        {{!-- <aside class="single_sidebar_widget search_widget">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search Posts">
                                 <span class="input-group-btn">
@@ -148,7 +150,7 @@
                                 </span>
                             </div><!-- /input-group -->
                             <div class="br"></div>
-                        </aside>
+                        </aside> --}}
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
                             <h4>Angela Hope</h4>
@@ -172,7 +174,7 @@
                             <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
                             <div class="br"></div>
                         </aside>
-                        <aside class="single_sidebar_widget post_category_widget">
+                        {{!-- <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Post Catgories</h4>
                             <ul class="list cat-list">
                                 <li>
@@ -219,8 +221,8 @@
                                 </li>
                             </ul>
                             <div class="br"></div>
-                        </aside>
-                        <aside class="single-sidebar-widget newsletter_widget">
+                        </aside> --}}
+                        {{!-- <aside class="single-sidebar-widget newsletter_widget">
                             <h4 class="widget_title">Newsletter</h4>
                             <p>
                                 Here, I focus on a range of items and features that we use in life without
@@ -239,7 +241,7 @@
                             <p class="text-bottom">You can unsubscribe at any time</p>
                             <div class="br"></div>
                         </aside>
-                     
+                      --}}
                     </div>
                 </div>
             </div>
